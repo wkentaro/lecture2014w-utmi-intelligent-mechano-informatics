@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import print_function
+import os
+import time
 
 import matplotlib.pyplot as plt
 
@@ -31,10 +33,14 @@ def print_params(**kwargs):
         print('{}: {}'.format(k, v))
 
 
-def view_origin_noise_recall(origin, noise, recall):
+def compare_origin_noise_recall(origin, noise, recall, save_dir):
     fig_data = [('original', origin), ('noise', noise), ('recall', recall)]
     for i, (title, img) in enumerate(fig_data):
         plt.subplot(131 + i)
         plt.imshow(img, cmap='gray')
         plt.title(title)
-    plt.show()
+    if not os.path.exists(save_dir):
+        os.mkdir(save_dir)
+    filename = 'fig_{}.png'.format(time.time())
+    filename = os.path.join(save_dir, filename)
+    plt.savefig(filename)

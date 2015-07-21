@@ -16,7 +16,7 @@ from visualization import (
     print_header,
     print_train_data,
     print_params,
-    view_origin_noise_recall,
+    compare_origin_noise_recall,
     )
 
 
@@ -54,21 +54,29 @@ def main(n_label, noise_amount, fit_mode):
     X_recall = []
     for x in X_noise:
         recall = hf.recall(x=x, n_times=10).reshape(-1)
+        recall[recall < 0] = -1
+        recall[recall >= 0] = 1
         X_recall.append(recall)
     X_recall = np.array(X_recall)
 
     # accuracy
     accuracy = np.array([np.linalg.norm(o-r) for o, r in zip(X, X_recall)])
-    mask = accuracy == 0
+    mask = (accuracy == 0)
     accuracy[mask], accuracy[~mask] = 1, 0
     print('accuracy:', accuracy.sum() / len(accuracy))
 
     # compare 3 images
-    mask = (accuracy == 0)
+    mask = (accuracy == 1)
     for origin, noise, recall in zip(X[mask], X_noise[mask], X_recall[mask]):
         origin, noise, recall = map(lambda x:x.reshape(img_shape).astype(int),
                                     [origin, noise, recall])
-        view_origin_noise_recall(origin, noise, recall)
+        compare_origin_noise_recall(origin, noise, recall, save_dir='accurate')
+
+    mask = ~mask
+    for origin, noise, recall in zip(X[mask], X_noise[mask], X_recall[mask]):
+        origin, noise, recall = map(lambda x:x.reshape(img_shape).astype(int),
+                                    [origin, noise, recall])
+        compare_origin_noise_recall(origin, noise, recall, save_dir='wrong')
 
 
 if __name__ == '__main__':
