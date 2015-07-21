@@ -59,9 +59,15 @@ def main(n_label, noise_amount, fit_mode):
         X_recall.append(recall)
     X_recall = np.array(X_recall)
 
+    print_header('result')
+    # similarity
+    similarity = np.array([np.linalg.norm(o-r) for o, r in zip(X, X_recall)])
+    similarity /= X[0].size
+    similarity = 1. - similarity
+    print('similarity:', np.mean(similarity))
     # accuracy
-    accuracy = np.array([np.linalg.norm(o-r) for o, r in zip(X, X_recall)])
-    mask = (accuracy == 0)
+    mask = (similarity == 1)
+    accuracy = np.copy(similarity)
     accuracy[mask], accuracy[~mask] = 1, 0
     print('accuracy:', accuracy.sum() / len(accuracy))
 
