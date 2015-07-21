@@ -3,6 +3,8 @@
 
 from __future__ import print_function
 
+import matplotlib.pyplot as plt
+
 
 def print_header(string, bar_length=40):
     print('-' * bar_length)
@@ -27,3 +29,13 @@ def print_params(**kwargs):
 
     for k, v in kwargs.iteritems():
         print('{}: {}'.format(k, v))
+
+
+def view_origin_noise_recall(origin, noise, recall):
+    fig_data = [('original', origin), ('noise', noise), ('recall', recall)]
+    for i, (title, img) in enumerate(fig_data):
+        plt.subplot(131 + i)
+        plt.imshow(img, cmap='gray')
+        plt.title(title)
+        print(img.astype(int))
+    plt.show()
