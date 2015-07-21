@@ -18,13 +18,14 @@ from recall import (
     )
 
 
-@click.command()
-@click.option('--n-sample', default=100, type=int)
-@click.option('--n-label', default=2, type=int, help='number of labels')
-@click.option('--noise-amount', default=0.05, type=float, help='noise amount')
-@click.option('--fit-mode', default='vector', type=str, help='fit mode')
-@click.option('--save-fig', is_flag=True)
-def main(n_sample, n_label, noise_amount, fit_mode, save_fig):
+def hopfield_single_performance(
+        n_sample,
+        n_label,
+        noise_amount,
+        fit_mode,
+        save_fig,
+        ):
+
     # parameters
     params = {
         'n_sample': n_sample,
@@ -54,6 +55,20 @@ def main(n_sample, n_label, noise_amount, fit_mode, save_fig):
         print('\n.. view recalling result\n')
         view_recalling_result(X, X_noise, X_recall,
                               accurate=accurate, **params)
+
+    similarity = np.mean(similarities)
+    accuracy = np.mean(accurate)
+    return similarity, accuracy
+
+
+@click.command()
+@click.option('--n-sample', default=100, type=int)
+@click.option('--n-label', default=2, type=int, help='number of labels')
+@click.option('--noise-amount', default=0.05, type=float, help='noise amount')
+@click.option('--fit-mode', default='vector', type=str, help='fit mode')
+@click.option('--save-fig', is_flag=True)
+def main(**kwargs):
+    hopfield_single_performance(**kwargs)
 
 
 if __name__ == '__main__':
