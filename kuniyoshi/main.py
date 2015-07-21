@@ -4,32 +4,14 @@
 from __future__ import print_function, division
 
 import numpy as np
-from sklearn.preprocessing import binarize
 from skimage.util import random_noise
 from skimage.transform import resize
 import matplotlib.pyplot as plt
 
 from hopfield import Hopfield
-from data import load_alphabet
-
-
-def transform_data(data, img_shape, resized_shape=None,
-                   do_binarize=False, noise_amount=0.05):
-    transformed = []
-    for x in data:
-        img = x.reshape(img_shape)
-        # resize
-        if resized_shape is not None:
-            img = resize(image=img, output_shape=resized_shape)
-        # binarize
-        if do_binarize:
-            img = binarize(img)
-            img[img == 0] = -1
-        # apply noise
-        img_trans = random_noise(image=img.astype(float), mode='s&p',
-                                 amount=noise_amount)
-        transformed.append(img_trans.reshape(-1))
-    return np.array(transformed)
+from utils import binarize
+from data import load_alphabet, create_train_data
+from visualization import print_header, print_train_data, print_params
 
 
 def main():
@@ -38,61 +20,44 @@ def main():
 
     # parameters
     n_label = 2
-    noise_amount = 0.0
-    img_resized_shape = (5, 5)
-    print('=parameters=')
-    print('n_label:', n_label)
-    print('noise_amount:', noise_amount)
-    print('img_resized_shape:', img_resized_shape)
+    img_shape = dataset.image_shape
+    print_params(n_label=n_label, img_shape=img_shape)
 
     # transform data
-    dataset.data = transform_data(data=dataset.data,
-                                  img_shape=(5, 5),
-                                  resized_shape=None,
-                                  do_binarize=True,
-                                  noise_amount=noise_amount)
+    dataset.data = binarize(dataset.data, binary_values=(-1,1))
 
     # create train data
     target_names = dataset.target_names[:n_label]
-    X, y = [], []
-    for t in target_names:
-        X.append(dataset.data[dataset.target == t])
-        y.append(dataset.target[dataset.target == t])
-    X = np.vstack(X)
-    y = np.hstack(y)
-    n_sample = len(X)
-    p = np.random.randint(0, n_sample, n_sample)
-    X, y = X[p], y[p]
-    print('=data=')
-    print('target_names:', target_names)
-    print('X.shape:', X.shape)
-    print('X:', X, sep='\n')
-    print('y.shape:', y.shape)
-    print('y:', y, sep='\n')
+    X, y = create_train_data(data=dataset.data,
+                             target=dataset.target,
+                             target_names=target_names,
+                             n_sample=10)
+    print_train_data(X, y, target_names)
 
     # fit hopfield
     hf = Hopfield()
     hf.fit(X, y, watch_weight=False)
 
     # recall
-    index = np.random.randint(0, n_sample)
-    print('=input=')
-    img = X[index].reshape(img_resized_shape).astype(int)
+    index = np.random.randint(0, len(X))
+    print_header('input')
+    img = X[index].reshape(img_shape).astype(int)
     img[img == -1] = 0
     print(img)
     plt.subplot(131)
     plt.imshow(img, cmap='gray')
-    print('=input with noise=')
-    input_ = X[index].reshape(img_resized_shape)
-    input_ = random_noise(X[index], mode='s&p', amount=0.1)
-    img = input_.reshape(img_resized_shape).astype(int)
+    print_header('input_with_noise')
+    input_ = X[index].reshape(img_shape)
+    input_ = random_noise(X[index].astype(float), mode='s&p', amount=0.1)
+    input_ = binarize(input_, binary_values=(-1,1))
+    img = input_.reshape(img_shape).astype(int)
     img[img == -1] = 0
     print(img)
     plt.subplot(132)
     plt.imshow(img, cmap='gray')
-    print('=output=')
-    ret = hf.recall(x=input_.reshape(-1), n_times=10)
-    img = ret.reshape(img_resized_shape).astype(int)
+    print_header('output')
+    ret = hf.recall(x=input_, n_times=10)
+    img = ret.reshape(img_shape).astype(int)
     img[img == -1] = 0
     print(img)
     plt.subplot(133)

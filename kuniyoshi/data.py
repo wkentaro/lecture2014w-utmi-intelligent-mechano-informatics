@@ -58,6 +58,22 @@ def load_alphabet():
     dataset = Bunch(
                 target_names=list('chilnot'),
                 target=np.array(list('chilnot')),
-                data=np.array([C, H, I, L, N, O, T]),
+                data=np.array(
+                        map(lambda x:x.reshape(-1), [C, H, I, L, N, O, T])
+                        ),
+                images=np.array([C, H, I, L, N, O, T]),
+                image_shape=(5, 5),
                 )
     return dataset
+
+
+def create_train_data(data, target, target_names, n_sample):
+    X, y = [], []
+    for t in target_names:
+        X.append(data[target == t])
+        y.append(target[target == t])
+    X = np.vstack(X)
+    y = np.hstack(y)
+    p = np.random.randint(0, len(X), n_sample)
+    X, y = X[p], y[p]
+    return X, y

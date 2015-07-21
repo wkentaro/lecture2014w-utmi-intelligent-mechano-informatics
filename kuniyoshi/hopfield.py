@@ -26,8 +26,6 @@ class Hopfield(object):
                 time.sleep(0.1)
             x = np.atleast_2d(x).reshape((-1, 1))
             W += np.dot(x, x.T)
-            for i in range(len(W)):
-                W[i][i] = 0
         self.weight_ = W
 
     def recall(self, x, n_times):
