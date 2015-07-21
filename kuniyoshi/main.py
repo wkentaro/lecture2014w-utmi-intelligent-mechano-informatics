@@ -23,14 +23,15 @@ from visualization import (
 @click.command()
 @click.option('--n-label', default=2, type=int, help='number of labels')
 @click.option('--noise-amount', default=0.05, type=float, help='noise amount')
-def main(n_label, noise_amount):
+@click.option('--fit-mode', default='vector', type=str, help='fit mode')
+def main(n_label, noise_amount, fit_mode):
     # load dataset
     dataset = load_alphabet()
 
     # parameters
     img_shape = dataset.image_shape
     print_params(n_label=n_label, img_shape=img_shape,
-                 noise_amount=noise_amount)
+                 noise_amount=noise_amount, fit_mode=fit_mode)
 
     # transform data
     dataset.data = binarize(dataset.data, binary_values=(-1,1))
@@ -44,7 +45,7 @@ def main(n_label, noise_amount):
     print_train_data(X, y, target_names)
 
     # fit hopfield
-    hf = Hopfield()
+    hf = Hopfield(mode=fit_mode)
     hf.fit(X, y, watch_weight=False)
 
     # recall
