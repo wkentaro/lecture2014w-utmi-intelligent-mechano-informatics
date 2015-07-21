@@ -91,7 +91,7 @@ def hopfield_two_label_performance(
 @click.command()
 @click.option('--n-sample', default=200, type=int)
 @click.option('--noise-amount', default=0.05, type=float, help='noise amount')
-@click.option('--fit-mode', default='vector', type=str, help='fit mode')
+@click.option('--fit-mode', default='hebbian', type=str, help='fit mode')
 @click.option('--save-fig', is_flag=True)
 def main(**kwargs):
     hopfield_two_label_performance(**kwargs)
