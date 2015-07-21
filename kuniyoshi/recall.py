@@ -5,7 +5,7 @@ import numpy as np
 from skimage.util import random_noise
 
 from utils import binarize
-from visualization import compare_origin_noise_recall
+from visualize import compare_origin_noise_recall
 
 
 def recall_with_noise(clf, X, noise_amount=0.05):

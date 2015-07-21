@@ -3,8 +3,7 @@
 
 from hopfield import Hopfield
 from data import load_alphabet, create_train_data
-from utils import binarize
-from visualization import print_train_data
+from utils import binarize, print_train_data
 
 
 def fit_hopfield(params):

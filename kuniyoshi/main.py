@@ -9,17 +9,12 @@ from skimage.transform import resize
 import matplotlib.pyplot as plt
 import click
 
-from utils import binarize
+from utils import binarize, print_header, print_params
 from fit import fit_hopfield
 from recall import (
     recall_with_noise,
     get_recalling_performance,
     view_recalling_result,
-    )
-from visualization import (
-    print_header,
-    print_params,
-    compare_origin_noise_recall,
     )
 
 
