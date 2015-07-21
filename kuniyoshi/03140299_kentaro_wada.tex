@@ -18,23 +18,8 @@
 % to insert figures
 \usepackage[dvipdfmx]{graphicx}
 
-%% to insert source codes
-% \usepackage{listings, jlisting}
-% \renewcommand{\lstlistingname}{list}
-% \lstset{language=C,
-%   basicstyle=\ttfamily\scriptsize,
-%   commentstyle=\textit,
-%   classoffset=1,
-%   keywordstyle=\bfseries,
-%   frame=tRBl,
-%   framesep=5pt,
-%   showstringspaces=false,
-%   numbers=left,
-%   stepnumber=1,
-%   numberstyle=\tiny,
-%   tabsize=2
-% }
 %%% -------------------------------------------------
+
 
 %%% Titles ------------------------------------------
 \title{知能機械情報学レポート課題1}
@@ -44,26 +29,39 @@
 \maketitle
 %%% -------------------------------------------------
 
+
 %%% Bodies ------------------------------------------
 \section{概要}
 Hopfield型のニューラルネットワークによって，2種類の2値(+1/-1)画像を記憶させ，
 元画像にノイズを加えた画像を初期値として想起させる．
 想起性能を調べる実験として以下のようなものを行った．
 \begin{itemize}
-  \item 画像の種類を2から6まで変化させる．
-  \item 2種類の画像に対して5から50\%のノイズを加える．
-  \item 4種類の画像に対して5から50\%のノイズを加える．
+  \item 画像の種類を変化させる．
+  \item 画像に対して加えるノイズ量を変化させる．
 \end{itemize}
 
 想起性能としては正解と類似度の全試行平均(類似度平均)と
 元画像の完全再現割合(正答率)を用いる．
+%%% -------------------------------------------------
+
 
 %%% -------------------------------------------------
+\section{画像の種類数による想起性能変化}
+%%% -------------------------------------------------
+画像の種類を2から6まで変化させ，想起性能の変化を調べた．
+
+
+%%% -------------------------------------------------
+\section{入力画像のノイズ量による想起性能変化}
+%%% -------------------------------------------------
+入力画像に加えるノイズ量を5から50\%まで変化させ，想起性能の変化を調べた．
+
 
 %%% Bibliography ------------------------------------
 \begin{thebibliography}{9}
   \bibitem{bib1} Samuel R．Buss，"Introduction to Inverse Kinematics with Jacobian Transpose，Pseudoinverse and Damped Least Squares methods"
 \end{thebibliography}
 %%% -------------------------------------------------
+
 
 \end{document}
