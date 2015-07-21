@@ -21,11 +21,12 @@ from visualization import (
 
 
 @click.command()
+@click.option('--n-sample', default=100, type=int)
 @click.option('--n-label', default=2, type=int, help='number of labels')
 @click.option('--noise-amount', default=0.05, type=float, help='noise amount')
 @click.option('--fit-mode', default='vector', type=str, help='fit mode')
-@click.option('--save-fig', default=False, type=bool)
-def main(n_label, noise_amount, fit_mode, save_fig):
+@click.option('--save-fig', is_flag=True)
+def main(n_sample, n_label, noise_amount, fit_mode, save_fig):
     # load dataset
     dataset = load_alphabet()
 
@@ -42,7 +43,7 @@ def main(n_label, noise_amount, fit_mode, save_fig):
     X, y = create_train_data(data=dataset.data,
                              target=dataset.target,
                              target_names=target_names,
-                             n_sample=100)
+                             n_sample=n_sample)
     print_train_data(X, y, target_names)
 
     # fit hopfield
@@ -74,14 +75,18 @@ def main(n_label, noise_amount, fit_mode, save_fig):
 
     # compare 3 images & save
     if save_fig:
-        mask = (accuracy == 1)
-        save_comparing_figure(X[mask], X_noise[mask], X_recall[mask],
-                              img_shape=img_shape,
-                              save_dir='accurate_{}'.format(n_label))
-        mask = ~mask
-        save_comparing_figs(X[mask], X_noise[mask], X_recall[mask],
-                              img_shape=img_shape,
-                              save_dir='wrong_{}'.format(n_label))
+        h, w = img_shape
+        X = X.reshape((-1, h, w)).astype(int)
+        X_noise = X_noise.reshape((-1, h, w)).astype(int)
+        X_recall = X_recall.reshape((-1, h, w)).astype(int)
+        for org, noise, recall, a in zip(X, X_noise, X_recall, accuracy):
+            if a == 1:
+                save_dir = 'accurate_{}'.format(n_label)
+            elif a == 0:
+                save_dir = 'wrong_{}'.format(n_label)
+            else:
+                raise ValueError('unnexpected accuracy value')
+            compare_origin_noise_recall(org, noise, recall, save_dir)
 
 
 if __name__ == '__main__':

@@ -44,10 +44,3 @@ def compare_origin_noise_recall(origin, noise, recall, save_dir):
     filename = 'fig_{}.png'.format(time.time())
     filename = os.path.join(save_dir, filename)
     plt.savefig(filename)
-
-
-def save_comparing_figs(X, X_noise, X_recall, img_shape, save_dir):
-    for origin, noise, recall in zip(X[mask], X_noise[mask], X_recall[mask]):
-        origin, noise, recall = map(lambda x:x.reshape(img_shape).astype(int),
-                                    [origin, noise, recall])
-        compare_origin_noise_recall(origin, noise, recall, save_dir)
