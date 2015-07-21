@@ -2,12 +2,15 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import print_function, division
+
 import numpy as np
 from sklearn.preprocessing import binarize
 from skimage.util import random_noise
 from skimage.transform import resize
+import matplotlib.pyplot as plt
 
 from hopfield import Hopfield
+from data import load_alphabet
 
 
 def transform_data(data, img_shape, resized_shape=None,
@@ -27,42 +30,6 @@ def transform_data(data, img_shape, resized_shape=None,
                                  amount=noise_amount)
         transformed.append(img_trans.reshape(-1))
     return np.array(transformed)
-
-
-def load_alphabet():
-    from sklearn.datasets.base import Bunch
-    T = np.array([
-        [1, 1, 1, 1, 1],
-        [0, 0, 1, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 0, 1, 0, 0],
-        ])
-    I = np.array([
-        [0, 1, 1, 1, 0],
-        [0, 0, 1, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 1, 1, 1, 0],
-        ])
-    L = np.array([
-        [1, 0, 0, 0, 0],
-        [1, 0, 0, 0, 0],
-        [1, 0, 0, 0, 0],
-        [1, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1],
-        ])
-    H = np.array([
-        [1, 0, 0, 0, 1],
-        [1, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 1],
-        [1, 0, 0, 0, 1],
-        ])
-    dataset = Bunch(target_names=['t','i','l','h'],
-                    target=np.array(['t','i','l','h']),
-                    data=np.array([T, I, L, H]))
-    return dataset
 
 
 def main():
@@ -110,14 +77,27 @@ def main():
     # recall
     index = np.random.randint(0, n_sample)
     print('=input=')
-    print(X[index].reshape(img_resized_shape).astype(int))
+    img = X[index].reshape(img_resized_shape).astype(int)
+    img[img == -1] = 0
+    print(img)
+    plt.subplot(131)
+    plt.imshow(img, cmap='gray')
     print('=input with noise=')
     input_ = X[index].reshape(img_resized_shape)
     input_ = random_noise(X[index], mode='s&p', amount=0.1)
-    print(input_.reshape(img_resized_shape).astype(int))
+    img = input_.reshape(img_resized_shape).astype(int)
+    img[img == -1] = 0
+    print(img)
+    plt.subplot(132)
+    plt.imshow(img, cmap='gray')
     print('=output=')
     ret = hf.recall(x=input_.reshape(-1), n_times=10)
-    print(ret.reshape(img_resized_shape).astype(int))
+    img = ret.reshape(img_resized_shape).astype(int)
+    img[img == -1] = 0
+    print(img)
+    plt.subplot(133)
+    plt.imshow(img, cmap='gray')
+    plt.show()
 
 
 if __name__ == '__main__':
