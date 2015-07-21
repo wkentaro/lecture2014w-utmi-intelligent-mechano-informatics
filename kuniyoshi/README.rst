@@ -2,14 +2,8 @@
 Intelligent_Mechano_Informatics
 ===============================
 
-Sample
--------
-.. image:: sample_image/label2_noise0.5_accurate.png
-
-`More <sample_image>`_
-
 How to Run
-----------
+==========
 .. code-block:: sh
 
     # simple fit and recall
@@ -21,6 +15,23 @@ How to Run
     # plot performances of recalling with noise for 2, 4 label memory
     $ python hopfield_noise_performance.py
 
+Result
+======
+
+``hopfield_single_performance.py``
+--------------------------------
+Below is sample image of ``hopfield_single_performance.py`` under ``noise_amount=0.5`` and ``n_label=2``.
+
+accurate:
+
+.. image:: sample_image/label2_noise0.5_accurate.png
+
+wrong:
+
+.. image:: sample_image/label2_noise0.5_wrong.png
+
+
+
 Report
-------
+======
 `Download Report <https://github.com/wkentaro/inbox/raw/master/Intelligent_Machano_Informatics/kuniyoshi/report/03140299_kentaro_wada.pdf>`_
