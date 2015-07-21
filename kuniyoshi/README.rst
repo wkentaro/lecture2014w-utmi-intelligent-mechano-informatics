@@ -31,7 +31,22 @@ wrong:
 .. image:: sample_image/label2_noise0.5_wrong.png
 
 
+``hopfield_two_label_performance.py``
+-------------------------------------
 
+.. image:: sample_image/two_label_performance.png
+
+
+``hopfield_labels_performance.py``
+-------------------------------------
+
+.. image:: sample_image/labels_performance.png
+
+
+``hopfield_noise_performance.py``
+-------------------------------------
+
+.. image:: sample_image/noise_performance.png
 Report
 ======
 `Download Report <https://github.com/wkentaro/inbox/raw/master/Intelligent_Machano_Informatics/kuniyoshi/report/03140299_kentaro_wada.pdf>`_
