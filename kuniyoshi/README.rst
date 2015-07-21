@@ -8,6 +8,18 @@ Sample
 
 `More <sample_image>`_
 
+How to Run
+----------
+.. code-block:: sh
+
+    # simple fit and recall
+    $ python hopfield_single_performance.py
+    # plot performances of recalling with two label memory
+    $ python hopfield_two_label_performance.py
+    # plot performances of recalling with multi label memory
+    $ python hopfield_labels_performance.py
+    # plot performances of recalling with noise for 2, 4 label memory
+    $ python hopfield_noise_performance.py
 
 Report
 ------
