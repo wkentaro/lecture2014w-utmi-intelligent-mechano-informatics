@@ -43,11 +43,18 @@ def view_recalling_result(X, X_noise, X_recall, accurate, **kwargs):
     X = X.reshape((-1, h, w)).astype(int)
     X_noise = X_noise.reshape((-1, h, w)).astype(int)
     X_recall = X_recall.reshape((-1, h, w)).astype(int)
+    count = [0, 0]
     for org, noise, recall, a in zip(X, X_noise, X_recall, accurate):
         if a == 1:
             save_dir = 'accurate_{}'.format(n_label)
+            if count[0] > 3:
+                continue
+            count[0] += 1
         elif a == 0:
             save_dir = 'wrong_{}'.format(n_label)
+            if count[1] > 3:
+                continue
+            count[1] += 1
         else:
             raise ValueError('unnexpected accuracy value')
         compare_origin_noise_recall(org, noise, recall, save_dir)
