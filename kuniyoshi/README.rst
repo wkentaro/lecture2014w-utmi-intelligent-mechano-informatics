@@ -33,20 +33,24 @@ wrong:
 
 ``hopfield_two_label_performance.py``
 -------------------------------------
+Below is performances of each combination of two labels.
 
 .. image:: sample_image/two_label_performance.png
 
 
 ``hopfield_labels_performance.py``
 -------------------------------------
+Below is graph of performances of 2 - 6 labels memory.
 
 .. image:: sample_image/labels_performance.png
 
 
 ``hopfield_noise_performance.py``
 -------------------------------------
+Below is graph of performances with 5 - 50% noise.
 
 .. image:: sample_image/noise_performance.png
+
 
 Report
 ======
