@@ -9,12 +9,10 @@ from skimage.transform import resize
 import matplotlib.pyplot as plt
 import click
 
-from hopfield import Hopfield
 from utils import binarize
-from data import load_alphabet, create_train_data
+from fit import fit_hopfield
 from visualization import (
     print_header,
-    print_train_data,
     print_params,
     compare_origin_noise_recall,
     )
@@ -27,28 +25,19 @@ from visualization import (
 @click.option('--fit-mode', default='vector', type=str, help='fit mode')
 @click.option('--save-fig', is_flag=True)
 def main(n_sample, n_label, noise_amount, fit_mode, save_fig):
-    # load dataset
-    dataset = load_alphabet()
-
     # parameters
-    img_shape = dataset.image_shape
-    print_params(n_label=n_label, img_shape=img_shape,
-                 noise_amount=noise_amount, fit_mode=fit_mode)
-
-    # transform data
-    dataset.data = binarize(dataset.data, binary_values=(-1,1))
-
-    # create train data
-    target_names = dataset.target_names[:n_label]
-    X, y = create_train_data(data=dataset.data,
-                             target=dataset.target,
-                             target_names=target_names,
-                             n_sample=n_sample)
-    print_train_data(X, y, target_names)
+    params = {
+        'n_sample': n_sample,
+        'n_label': n_label,
+        'noise_amount': noise_amount,
+        'fit_mode': fit_mode,
+        }
+    print_params(**params)
 
     # fit hopfield
-    hf = Hopfield(mode=fit_mode)
-    hf.fit(X, y, watch_weight=False)
+    print_header('fitting hopfield')
+    hf, X, y, target_names, params = fit_hopfield(params)
+    print_params(**params)
 
     # recall
     X_noise = random_noise(X.astype(float), mode='s&p', amount=noise_amount)
