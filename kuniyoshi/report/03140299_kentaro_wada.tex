@@ -44,15 +44,15 @@ Hopfield型のニューラルネットワークによって，5x5の2値(+1/-1)�
   \item 画像に対して加えるノイズ量を変化させる．
 \end{itemize}
 
-想起性能としては正解と類似度の全試行平均(類似度平均)と
+想起性能としては正解と類似度の全試行平均(類似度)と
 元画像の完全再現割合(正答率)を用いる．
 
 記憶させる画像は\figref{original-images}のような
 C, H, I, L, O, Tの大文字アルファベットとする．
 \begin{figure}[htbp]
   \centering
-    \includegraphics[width=0.5\textwidth]{figs/alphabet_images}
-    \caption{orignal images}
+    \includegraphics[width=\columnwidth]{figs/alphabet_images}
+    \caption{利用画像}
   \label{fig:original-images}
 \end{figure}
 %%% -------------------------------------------------
@@ -62,6 +62,15 @@ C, H, I, L, O, Tの大文字アルファベットとする．
 \section{画像の種類数による想起性能変化}
 %%% -------------------------------------------------
 画像の種類を2から6まで変化させ，想起性能の変化を調べた．
+\figref{labels-performance}に示すように，画像の種類を増加させると想起性能は下がる．
+しかし正答率(accuracy)は大きく減少する一方で，
+類似度平均(similarity)はそれほど減少しないということがわかる．
+\begin{figure}[htpb]
+  \centering
+    \includegraphics[width=\columnwidth]{figs/labels_performance}
+    \caption{画像の種類数による想起性能変化}
+    \label{fig:labels-performance}
+\end{figure}
 
 
 %%% -------------------------------------------------
