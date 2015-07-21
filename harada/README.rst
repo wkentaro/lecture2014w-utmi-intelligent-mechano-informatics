@@ -1,8 +1,8 @@
 =============
 Harada Report
 =============
-- `View Report <03140299_Kentaro_Wada.pdf>`_
-- `Download Report <https://github.com/wkentaro/utmi-intelligent-mechano-informatics/raw/master/harada/03140299_Kentaro_Wada.pdf>`_
+- `View Report <report/03140299_kentaro_wada.pdf>`_
+- `Download Report <https://github.com/wkentaro/utmi-intelligent-mechano-informatics/raw/master/harada/report/03140299_kentaro_wada.pdf>`_
 
 How to Run
 ==========
