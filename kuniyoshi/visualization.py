@@ -37,5 +37,4 @@ def view_origin_noise_recall(origin, noise, recall):
         plt.subplot(131 + i)
         plt.imshow(img, cmap='gray')
         plt.title(title)
-        print(img.astype(int))
     plt.show()

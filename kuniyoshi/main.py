@@ -12,18 +12,25 @@ import click
 from hopfield import Hopfield
 from utils import binarize
 from data import load_alphabet, create_train_data
-from visualization import print_header, print_train_data, print_params
+from visualization import (
+    print_header,
+    print_train_data,
+    print_params,
+    view_origin_noise_recall,
+    )
 
 
 @click.command()
 @click.option('--n-label', default=2, type=int, help='number of labels')
-def main(n_label):
+@click.option('--noise-amount', default=0.05, type=float, help='noise amount')
+def main(n_label, noise_amount):
     # load dataset
     dataset = load_alphabet()
 
     # parameters
     img_shape = dataset.image_shape
-    print_params(n_label=n_label, img_shape=img_shape)
+    print_params(n_label=n_label, img_shape=img_shape,
+                 noise_amount=noise_amount)
 
     # transform data
     dataset.data = binarize(dataset.data, binary_values=(-1,1))
@@ -33,7 +40,7 @@ def main(n_label):
     X, y = create_train_data(data=dataset.data,
                              target=dataset.target,
                              target_names=target_names,
-                             n_sample=10)
+                             n_sample=100)
     print_train_data(X, y, target_names)
 
     # fit hopfield
@@ -41,19 +48,26 @@ def main(n_label):
     hf.fit(X, y, watch_weight=False)
 
     # recall
-    index = np.random.randint(0, len(X))
-    origin = X[index]
-    noise = random_noise(origin.astype(float), mode='s&p', amount=0.1)
-    noise = binarize(noise, binary_values=(-1,1))
-    recall = hf.recall(x=noise, n_times=10)
-    imgs = map(lambda x:x.reshape(img_shape).astype(int),
-               [origin, noise, recall])
-    for i, img in enumerate(imgs):
-        plt.subplot(131 + i)
-        plt.imshow(img, cmap='gray')
-        print(img.astype(int))
-    print('norm:', np.linalg.norm(imgs[0] - imgs[2]))
-    plt.show()
+    X_noise = random_noise(X.astype(float), mode='s&p', amount=noise_amount)
+    X_noise = binarize(X_noise, binary_values=(-1,1))
+    X_recall = []
+    for x in X_noise:
+        recall = hf.recall(x=x, n_times=10).reshape(-1)
+        X_recall.append(recall)
+    X_recall = np.array(X_recall)
+
+    # accuracy
+    accuracy = np.array([np.linalg.norm(o-r) for o, r in zip(X, X_recall)])
+    mask = accuracy == 0
+    accuracy[mask], accuracy[~mask] = 1, 0
+    print('accuracy:', accuracy.sum() / len(accuracy))
+
+    # compare 3 images
+    mask = (accuracy == 0)
+    for origin, noise, recall in zip(X[mask], X_noise[mask], X_recall[mask]):
+        origin, noise, recall = map(lambda x:x.reshape(img_shape).astype(int),
+                                    [origin, noise, recall])
+        view_origin_noise_recall(origin, noise, recall)
 
 
 if __name__ == '__main__':
