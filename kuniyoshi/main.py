@@ -71,14 +71,13 @@ def main(n_label, noise_amount, fit_mode):
     accuracy[mask], accuracy[~mask] = 1, 0
     print('accuracy:', accuracy.sum() / len(accuracy))
 
-    # compare 3 images
+    # compare 3 images & save
     mask = (accuracy == 1)
     for origin, noise, recall in zip(X[mask], X_noise[mask], X_recall[mask]):
         origin, noise, recall = map(lambda x:x.reshape(img_shape).astype(int),
                                     [origin, noise, recall])
         compare_origin_noise_recall(origin, noise, recall,
                                     save_dir='accurate_{}'.format(n_label))
-
     mask = ~mask
     for origin, noise, recall in zip(X[mask], X_noise[mask], X_recall[mask]):
         origin, noise, recall = map(lambda x:x.reshape(img_shape).astype(int),
