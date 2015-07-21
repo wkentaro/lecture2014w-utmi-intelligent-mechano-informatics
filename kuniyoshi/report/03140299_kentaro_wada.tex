@@ -7,6 +7,8 @@
 %%% Packages ----------------------------------------
 % to input Japanese
 \usepackage[japanese]{babel}
+\usepackage{url}
+\urlstyle{same}
 
 %% something
 % \usepackage{ascmac}
@@ -36,7 +38,7 @@
 
 %%% Bodies ------------------------------------------
 \section{概要}
-Hopfield型のニューラルネットワークによって，5x5の2値(+1/-1)画像を記憶させ，
+Hopfield型のニューラルネットワーク\cite{Kuniyoshi:20150601}\cite{Youtube:HF}によって，5x5の2値(+1/-1)画像を記憶させ，
 元画像にノイズを加えた画像を初期値として想起させる．
 想起性能を調べる実験として以下のようなものを行った．
 \begin{itemize}
@@ -125,6 +127,7 @@ C, H, I, L, T, Xの大文字アルファベットとする．
 \end{figure}
 %%% -------------------------------------------------
 
+
 %%% -------------------------------------------------
 \section{結論}
 以上の実験から，Hopfield型のニューラルネットワークによって，
@@ -132,10 +135,16 @@ C, H, I, L, T, Xの大文字アルファベットとする．
 %%% -------------------------------------------------
 
 
+%%% -------------------------------------------------
+\section{講義の感想}
+%%% -------------------------------------------------
+
+
 %%% Bibliography ------------------------------------
-% \begin{thebibliography}{9}
-%   \bibitem{bib1} Samuel R．Buss，"Introduction to Inverse Kinematics with Jacobian Transpose，Pseudoinverse and Damped Least Squares methods"
-% \end{thebibliography}
+\begin{thebibliography}{9}
+  \bibitem{Kuniyoshi:20150601} 国吉康夫，知能機械情報学，学習と自律性，教師付き学習と教師なし学習，Hopfield Netと連想記憶, 2015
+  \bibitem{Youtube:HF} Math4IQB, Hopfield Networks, \url{https://www.youtube.com/watch?v=gfPUWwBkXZY}, 2013
+\end{thebibliography}
 %%% -------------------------------------------------
 
 
