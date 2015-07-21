@@ -18,6 +18,10 @@
 % to insert figures
 \usepackage[dvipdfmx]{graphicx}
 
+% custom command
+\newcommand{\figref}[1]{\figurename\ref{fig:#1}}
+\newcommand{\tabref}[1]{\tablename\ref{tab:#1}}
+
 %%% -------------------------------------------------
 
 
@@ -32,7 +36,7 @@
 
 %%% Bodies ------------------------------------------
 \section{概要}
-Hopfield型のニューラルネットワークによって，2種類の2値(+1/-1)画像を記憶させ，
+Hopfield型のニューラルネットワークによって，5x5の2値(+1/-1)画像を記憶させ，
 元画像にノイズを加えた画像を初期値として想起させる．
 想起性能を調べる実験として以下のようなものを行った．
 \begin{itemize}
@@ -42,6 +46,15 @@ Hopfield型のニューラルネットワークによって，2種類の2値(+1/
 
 想起性能としては正解と類似度の全試行平均(類似度平均)と
 元画像の完全再現割合(正答率)を用いる．
+
+記憶させる画像は\figref{original-images}のような
+C, H, I, L, O, Tの大文字アルファベットとする．
+\begin{figure}[htbp]
+  \centering
+    \includegraphics[width=0.5\textwidth]{figs/alphabet_images}
+    \caption{orignal images}
+  \label{fig:original-images}
+\end{figure}
 %%% -------------------------------------------------
 
 
