@@ -1,7 +1,7 @@
-================================================
-Intelligent Mechano Informatics Kuniyoshi Report
-================================================
-`Download Report <https://github.com/wkentaro/inbox/raw/master/Intelligent_Machano_Informatics/kuniyoshi/report/03140299_kentaro_wada.pdf>`_
+================
+Kuniyoshi Report
+================
+`Download Report <https://github.com/wkentaro/utmi-intelligent-mechano-informatics/raw/master/kuniyoshi/report/03140299_kentaro_wada.pdf>`_
 
 How to Run
 ==========
