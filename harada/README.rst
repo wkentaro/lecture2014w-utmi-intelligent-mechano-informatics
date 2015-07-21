@@ -18,4 +18,4 @@ Result
 ``svm.py``
 ----------
 
-.. image:: svm.png
+.. image:: sample_image/svm.png
