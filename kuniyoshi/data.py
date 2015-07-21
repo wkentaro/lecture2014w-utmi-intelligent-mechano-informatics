@@ -59,7 +59,8 @@ def load_alphabet():
                 target_names=list('chilnot'),
                 target=np.array(list('chilnot')),
                 data=np.array(
-                        map(lambda x:x.reshape(-1), [C, H, I, L, N, O, T])
+                        map(lambda x:x.reshape(-1).astype(float),
+                            [C, H, I, L, N, O, T])
                         ),
                 images=np.array([C, H, I, L, N, O, T]),
                 image_shape=(5, 5),
