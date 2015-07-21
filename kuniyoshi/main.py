@@ -70,13 +70,15 @@ def main(n_label, noise_amount, fit_mode):
     for origin, noise, recall in zip(X[mask], X_noise[mask], X_recall[mask]):
         origin, noise, recall = map(lambda x:x.reshape(img_shape).astype(int),
                                     [origin, noise, recall])
-        compare_origin_noise_recall(origin, noise, recall, save_dir='accurate')
+        compare_origin_noise_recall(origin, noise, recall,
+                                    save_dir='accurate_{}'.format(n_label))
 
     mask = ~mask
     for origin, noise, recall in zip(X[mask], X_noise[mask], X_recall[mask]):
         origin, noise, recall = map(lambda x:x.reshape(img_shape).astype(int),
                                     [origin, noise, recall])
-        compare_origin_noise_recall(origin, noise, recall, save_dir='wrong')
+        compare_origin_noise_recall(origin, noise, recall,
+                                    save_dir='wrong_{}'.format(n_label))
 
 
 if __name__ == '__main__':
