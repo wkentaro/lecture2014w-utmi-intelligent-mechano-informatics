@@ -100,14 +100,34 @@ C, H, I, L, T, Xの大文字アルファベットとする．
 入力画像に加えるノイズ量を5から50\%まで変化させ，想起性能の変化を調べた．
 画像の種類数は2, 4の場合とした．
 
+結果は\figref{noise-performance}のようになり，
+記憶させた画像種類数が2の場合には，入力画像に対するノイズは想起性能に大きな影響を与えることはなく，
+50\%のノイズを加えた場合でもほぼ100\%の想起性能を持つ．
 
+一方で画像種類数が4の場合には，ノイズの増加に従って想起性能は大きく減少した．
+これは，\figref{noise-label4-wrong-sample}に示すように,
+記憶画像の別の画像を想起してしまうことが起こりやすくなるからだと考えられる．
+
+\begin{figure}[hbtp]
+  \centering
+    \includegraphics[width=\columnwidth]{figs/noise_performance}
+    \caption{ノイズに対する想起性能変化}
+    \label{fig:noise-performance}
+\end{figure}
+
+\begin{figure}[hbtp]
+  \centering
+    \includegraphics[width=\columnwidth]{figs/noise_label4_wrong_sample}
+    \caption{画像種類数4でのノイズによる誤りの例}
+    \label{fig:noise-label4-wrong-sample}
+\end{figure}
 %%% -------------------------------------------------
 
 
 %%% Bibliography ------------------------------------
-\begin{thebibliography}{9}
-  \bibitem{bib1} Samuel R．Buss，"Introduction to Inverse Kinematics with Jacobian Transpose，Pseudoinverse and Damped Least Squares methods"
-\end{thebibliography}
+% \begin{thebibliography}{9}
+%   \bibitem{bib1} Samuel R．Buss，"Introduction to Inverse Kinematics with Jacobian Transpose，Pseudoinverse and Damped Least Squares methods"
+% \end{thebibliography}
 %%% -------------------------------------------------
 
 

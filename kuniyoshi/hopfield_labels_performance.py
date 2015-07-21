@@ -11,7 +11,7 @@ from hopfield_single_performance import hopfield_single_performance
 # static params
 n_sample = 200
 noise_amount = 0.05
-fit_mode='hebbian'
+fit_mode = 'hebbian'
 save_fig = False
 
 # dynamic params: n_label

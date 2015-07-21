@@ -18,3 +18,4 @@ def compare_origin_noise_recall(origin, noise, recall, save_dir):
     filename = 'fig_{}.png'.format(time.time())
     filename = os.path.join(save_dir, filename)
     plt.savefig(filename)
+    plt.cla()
