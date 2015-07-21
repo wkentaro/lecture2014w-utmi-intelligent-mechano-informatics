@@ -14,7 +14,7 @@ def main():
     # static params
     n_sample = 200
     fit_mode = 'hebbian'
-    save_fig = True
+    save_fig = False
 
     for n_label, c in zip([2, 4], ['rb', 'gy']):
         # dynamic params: noise_amount

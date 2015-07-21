@@ -47,6 +47,7 @@ wrong:
 -------------------------------------
 
 .. image:: sample_image/noise_performance.png
+
 Report
 ======
 `Download Report <https://github.com/wkentaro/inbox/raw/master/Intelligent_Machano_Informatics/kuniyoshi/report/03140299_kentaro_wada.pdf>`_
