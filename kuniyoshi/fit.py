@@ -8,9 +8,13 @@ from utils import binarize, print_train_data
 
 def fit_hopfield(params):
     # get params
-    n_label = params['n_label']
+    target_names = params.get('target_names', None)
+    n_label = params.get('n_label', None)
     n_sample = params['n_sample']
     fit_mode = params['fit_mode']
+
+    if target_names is None:
+        target_names = dataset.target_names[:n_label]
 
     # load dataset
     dataset = load_alphabet()
@@ -19,7 +23,6 @@ def fit_hopfield(params):
     dataset.data = binarize(dataset.data, binary_values=(-1,1))
 
     # create train data
-    target_names = dataset.target_names[:n_label]
     X, y = create_train_data(data=dataset.data,
                              target=dataset.target,
                              target_names=target_names,
