@@ -62,7 +62,7 @@ def hopfield_single_performance(
 
 
 @click.command()
-@click.option('--n-sample', default=100, type=int)
+@click.option('--n-sample', default=200, type=int)
 @click.option('--n-label', default=2, type=int, help='number of labels')
 @click.option('--noise-amount', default=0.05, type=float, help='noise amount')
 @click.option('--fit-mode', default='vector', type=str, help='fit mode')

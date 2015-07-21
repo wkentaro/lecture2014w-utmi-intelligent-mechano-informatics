@@ -9,7 +9,7 @@ from hopfield_single_performance import hopfield_single_performance
 
 
 # static params
-n_sample = 100
+n_sample = 200
 noise_amount = 0.05
 fit_mode='hebbian'
 save_fig = False
@@ -39,5 +39,5 @@ plt.ylabel('number performance')
 plt.xticks(n_labels)
 plt.ylim(0, 1)
 plt.legend(loc='lower left')
-plt.savefig('hopfield_labels_performance.png')
+plt.savefig('labels_performance.png')
 # plt.show()

@@ -8,16 +8,17 @@ from utils import binarize, print_train_data
 
 def fit_hopfield(params):
     # get params
-    target_names = params.get('target_names', None)
     n_label = params.get('n_label', None)
     n_sample = params['n_sample']
     fit_mode = params['fit_mode']
 
-    if target_names is None:
-        target_names = dataset.target_names[:n_label]
-
     # load dataset
     dataset = load_alphabet()
+
+    # target_name
+    target_names = params.get('target_names', None)
+    if target_names is None:
+        target_names = dataset.target_names[:n_label]
 
     # transform data
     dataset.data = binarize(dataset.data, binary_values=(-1,1))
