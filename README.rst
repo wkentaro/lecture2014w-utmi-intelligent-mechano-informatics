@@ -1,6 +1,6 @@
-===============================
-Intelligent_Mechano_Informatics
-===============================
+====================================
+utmi-intelligent-mechano-informatics
+====================================
 - Intelligent Mechano Informatics
 - 2015 S1, S2
 - Monday 2 period
