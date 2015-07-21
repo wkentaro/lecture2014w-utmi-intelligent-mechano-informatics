@@ -1,6 +1,7 @@
 ===============================
 Intelligent_Mechano_Informatics
 ===============================
+`Download Report <https://github.com/wkentaro/inbox/raw/master/Intelligent_Machano_Informatics/kuniyoshi/report/03140299_kentaro_wada.pdf>`_
 
 How to Run
 ==========
@@ -50,8 +51,3 @@ Below is graph of performances of 2 - 6 labels memory.
 Below is graph of performances with 5 - 50% noise.
 
 .. image:: sample_image/noise_performance.png
-
-
-Report
-======
-`Download Report <https://github.com/wkentaro/inbox/raw/master/Intelligent_Machano_Informatics/kuniyoshi/report/03140299_kentaro_wada.pdf>`_
