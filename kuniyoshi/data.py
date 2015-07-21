@@ -34,12 +34,12 @@ def load_alphabet():
         [0, 1, 1, 1, 1],
         [0, 0, 0, 0, 0],
         ])
-    O = np.array([
-        [0, 0, 0, 0, 0],
+    X = np.array([
         [0, 1, 1, 1, 0],
+        [1, 0, 1, 0, 1],
+        [1, 1, 0, 1, 1],
+        [1, 0, 1, 0, 1],
         [0, 1, 1, 1, 0],
-        [0, 1, 1, 1, 0],
-        [0, 0, 0, 0, 0],
         ])
     T = np.array([
         [0, 0, 0, 0, 0],
@@ -49,13 +49,13 @@ def load_alphabet():
         [1, 1, 0, 1, 1],
         ])
     dataset = Bunch(
-                target_names=list('chilot'),
-                target=np.array(list('chilot')),
+                target_names=list('chiltx'),
+                target=np.array(list('chiltx')),
                 data=np.array(
                         map(lambda x:x.reshape(-1).astype(float),
-                            [C, H, I, L,  O, T])
+                            [C, H, I, L, T, X])
                         ),
-                images=np.array([C, H, I, L, O, T]),
+                images=np.array([C, H, I, L, T, X]),
                 image_shape=(5, 5),
                 )
     return dataset

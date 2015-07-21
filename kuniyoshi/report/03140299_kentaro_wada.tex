@@ -48,7 +48,7 @@ Hopfield型のニューラルネットワークによって，5x5の2値(+1/-1)�
 元画像の完全再現割合(正答率)を用いる．
 
 記憶させる画像は\figref{original-images}のような
-C, H, I, L, O, Tの大文字アルファベットとする．
+C, H, I, L, T, Xの大文字アルファベットとする．
 \begin{figure}[htbp]
   \centering
     \includegraphics[width=\columnwidth]{figs/alphabet_images}
@@ -59,10 +59,11 @@ C, H, I, L, O, Tの大文字アルファベットとする．
 
 
 %%% -------------------------------------------------
-\section{2種類画像における識別性能}\label{sec:two-label-performance}
+\section{2種類画像における想起性能}\label{sec:two-label-performance}
 全6種の画像から2つを選択する組み合わせは15種類ある．
 各組み合わせにおける識別性能は\figref{two-label-performance}
-のようになり，組み合わせによる識別性能の変動は小さいと言える．
+のようになり，2種類画像の場合の想起性能は高い．
+また，組み合わせによる識別性能の変動も小さいと言える．
 \begin{figure}[htpb]
   \centering
     \includegraphics[width=\columnwidth]{figs/two_label_performance}

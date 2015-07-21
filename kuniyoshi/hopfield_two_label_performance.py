@@ -63,7 +63,7 @@ def hopfield_two_label_performance(
     labels = []
     similarities = []
     accuracies = []
-    for target_names in itertools.combinations('chilot', 2):
+    for target_names in itertools.combinations('chiltx', 2):
         similarity, accuracy = _two_label_performance(target_names, params)
         labels.append(','.join(target_names))
         similarities.append(similarity)
