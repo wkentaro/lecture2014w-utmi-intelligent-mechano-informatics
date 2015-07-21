@@ -1,7 +1,8 @@
 ================
 Kuniyoshi Report
 ================
-`Download Report <https://github.com/wkentaro/utmi-intelligent-mechano-informatics/raw/master/kuniyoshi/report/03140299_kentaro_wada.pdf>`_
+* `View Report <report/03140299_kentaro_wada.pdf>`_
+* `Download Report <https://github.com/wkentaro/utmi-intelligent-mechano-informatics/raw/master/kuniyoshi/report/03140299_kentaro_wada.pdf>`_
 
 How to Run
 ==========
